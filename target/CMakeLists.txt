@@ -1,6 +1,12 @@
 enable_language(ASM)
 
-set(TEXT_BASE 0x40309000)
+if (NOT DEFINED TEXT_BASE)
+    set(TEXT_BASE 0x40309000)
+endif ()
+
+if (NOT DEFINED tools)
+    MESSAGE(FATAL_ERROR "tools path not specified")
+endif ()
 
 set(CMAKE_C_COMPILER "${tools}/bin/arm-eabi-gcc")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Os  -Wall -fno-builtin -ffreestanding -march=armv7-a -mthumb -ffunction-sections -fdata-sections ")
